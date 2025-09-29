@@ -21,6 +21,16 @@ jobs:
             env:
               GIT_SSH_COMMAND: "ssh -o StrictHostKeyChecking=no"
             run: ./full-test.sh
+
+          - name: Check build artifacts
+            run: |
+              echo "Listing buildroot output images..."
+              ls -lh buildroot/output/images/ || true
+              echo "Checking Image existence..."
+              test -f buildroot/output/images/Image && echo "Image found ✅" || echo "Image missing ❌"
+              echo "Checking rootfs.ext4 existence..."
+              test -f buildroot/output/images/rootfs.ext4 && echo "rootfs.ext4 found ✅" || echo "rootfs.ext4 missing ❌"
+              
           - name: Cleanup
             if: always()
             run: |
