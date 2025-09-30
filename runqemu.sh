@@ -13,3 +13,7 @@ qemu-system-aarch64 \
     -device virtio-net-device,netdev=eth0 \
     -drive file=buildroot/output/images/rootfs.ext4,if=none,format=raw,id=hd0 \
     -device virtio-blk-device,drive=hd0 -device virtio-rng-pci
+
+# Try to give qemu more time to boot
+echo "Waiting 15 seconds for qemu to boot..."
+sleep 15
