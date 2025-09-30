@@ -15,5 +15,8 @@ qemu-system-aarch64 \
     -device virtio-blk-device,drive=hd0 -device virtio-rng-pci &
 
 # Try to give qemu more time to boot
-echo "Waiting 15 seconds for qemu to boot..."
-sleep 15
+echo "Waiting for SSH on port 10022..."
+until ssh -o StrictHostKeyChecking=no -o ConnectTimeout=1 root@localhost echo "SSH ready" &>/dev/null; do
+    sleep 2
+done
+echo "QEMU SSH ready!"
