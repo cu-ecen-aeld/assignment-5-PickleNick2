@@ -21,6 +21,10 @@ jobs:
             run: |
               ssh-keygen -R github.com || true
               ssh-keyscan github.com >> ~/.ssh/known_hosts
+          - name: Debug - check Image presence
+            run: |
+                echo "Listing output/images contents:"
+                ls -lh buildroot/output/images/ || true
           - name: Run full test
             env:
               GIT_SSH_COMMAND: "ssh -o StrictHostKeyChecking=no"
