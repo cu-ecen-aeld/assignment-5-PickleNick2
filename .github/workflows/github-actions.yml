@@ -25,6 +25,22 @@ jobs:
             run: |
                 echo "Listing output/images contents:"
                 ls -lh buildroot/output/images/ || true
+          - name: Check port 9000
+            run: |
+                if lsof -i :9000; then
+                  echo "Port 9000 is in use, killing process..."
+                  sudo fuser -k 9000/tcp
+                else
+                  echo "Port 9000 is free"
+                fi
+          - name: Check SSH port 10022
+            run: |
+                if lsof -i :10022; then
+                  echo "Port 10022 is in use, killing process..."
+                  sudo fuser -k 10022/tcp
+                else
+                  echo "Port 10022 is free"
+                fi
           - name: Run full test
             env:
               GIT_SSH_COMMAND: "ssh -o StrictHostKeyChecking=no"
