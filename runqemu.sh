@@ -20,6 +20,6 @@ qemu-system-aarch64 \
 # Try to give qemu more time to boot
 echo "Waiting for SSH on port 10022..."
 until ssh -o StrictHostKeyChecking=no -o ConnectTimeout=1 root@localhost echo "SSH ready" &>/dev/null; do
-    sleep 2
+    sleep 15
 done
 echo "QEMU SSH ready!"
