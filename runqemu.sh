@@ -3,6 +3,9 @@
 #Host forwarding: Host Port 10022 ->> QEMU Port 22 
 #Author: Siddhant Jajoo.
 
+#kill any leftover instances of qemu
+pkill -f qemu-system-aarch64 || true
+
 
 qemu-system-aarch64 \
     -M virt  \
